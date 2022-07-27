@@ -1,6 +1,6 @@
-# mybeego
+# myadmin
 
-> this is a mybeego project
+> 这是我的第一个前端项目
 
 ## Build Setup
 
