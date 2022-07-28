@@ -34,7 +34,7 @@
         <el-menu
           :router="true"
           :unique-opened="true"
-          default-active="1-1"
+          default-active="/users"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
