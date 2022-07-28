@@ -10,12 +10,12 @@
         </el-col>
         <el-col :span="8">
           <div>
-            <h3>超级后台管理系统</h3>
+            <h3>全栈开发工程师</h3>
           </div>
         </el-col>
         <el-col :span="8">
           <div class="userinfo">
-            <span>欢迎您光临红浪漫</span><a href="#" @click.prevent="logout">退出</a>
+            <span>欢迎您光临Vue+elementUi</span><a href="#" @click.prevent="logout">退出</a>
           </div>
         </el-col>
       </el-row>

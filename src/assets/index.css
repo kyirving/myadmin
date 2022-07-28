@@ -4,3 +4,9 @@ html,body{
   margin: 0;
   padding: 0;
 }
+
+
+.my-create {
+  text-align: right;
+  margin-bottom: 10px;
+}
