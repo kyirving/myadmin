@@ -21,9 +21,57 @@
       </el-row>
 
     </el-header>
-    <el-container>
-      <el-aside width="200px">Aside</el-aside>
-      <el-main>Main</el-main>
+    <el-container width="200px">
+      <el-aside width="200px">
+
+        <!--
+          default-active 当前激活的菜单
+          open 菜单打开的事件
+          close 菜单关闭的事件
+          active-text-color 当前激活的菜单的颜色
+
+        -->
+        <el-menu
+          :router="true"
+          :unique-opened="true"
+          default-active="1-1"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b">
+          <el-submenu index="1">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>系统管理</span>
+            </template>
+            <el-menu-item index="/users">用户管理</el-menu-item>
+            <!-- 三级菜单 -->
+             <!-- <el-submenu index="1-4">
+                <template slot="title">选项4</template>
+                <el-menu-item index="1-4-1">选项1</el-menu-item>
+              </el-submenu> -->
+          </el-submenu>
+
+          <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>系统管理</span>
+            </template>
+            <el-menu-item index="2-1">用户管理</el-menu-item>
+            <!-- 三级菜单 -->
+             <!-- <el-submenu index="1-4">
+                <template slot="title">选项4</template>
+                <el-menu-item index="1-4-1">选项1</el-menu-item>
+              </el-submenu> -->
+          </el-submenu>
+        </el-menu>
+      </el-aside>
+      <el-main>
+        <!-- 子路由出口 -->
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -49,6 +97,12 @@ export default {
       }).catch(() => {
         console.log("取消退出")
       });
+    },
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
     }
   }
 }
@@ -56,6 +110,10 @@ export default {
 
 
 <style scoped>
+
+  .el-menu-vertical-demo{
+    height: 100%;
+  }
   .my-container{
     height: 100%;
   }
@@ -81,9 +139,6 @@ export default {
 
   .el-main {
     background-color: #E9EEF3;
-    color: #333;
-    text-align: center;
-    line-height: 160px;
   }
 
   body > .el-container {
