@@ -9,8 +9,10 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 // 导入全局样式
-
 import '@/assets/index.css'
+
+// 导入vuex 状态管理
+import store from './store/index'
 
 // 安装ElementUI 插件
 Vue.use(ElementUI);
@@ -20,7 +22,8 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  router, //使用router
+  store, //使用store
   components: { App },
   template: '<App/>'
 })

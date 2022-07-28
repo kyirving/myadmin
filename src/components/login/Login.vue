@@ -71,6 +71,9 @@
                 type: 'success'
               });
 
+              // 更新状态数据
+              this.$store.commit('saveUserInfo', res.data.data)
+
               //编程式导航 跳转首页
               this.$router.push("/")
             } else {
@@ -94,6 +97,7 @@
 <style>
 .loginFrom {
   height: 100%;
+  background-color: #2d434c;
   /* background-image: "@/assets/rww.jpg"; */
 
   /* background-image:url('../../assets/rww.jpg');
