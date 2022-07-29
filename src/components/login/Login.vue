@@ -22,8 +22,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
-
   export default {
     data() {
       return {
@@ -62,9 +60,9 @@
       //登录功能的实现
       login(){
 
-        axios.post("http://127.0.0.1:8080/user/login" , this.loginFrom)
+        this.$axios.post("http://127.0.0.1:8080/user/login" , this.loginFrom)
         .then(res => {
-            if (res.data.code == 200) {
+            if (res.code == 200) {
 
               this.$message({
                 message: '登录成功',
@@ -72,7 +70,7 @@
               });
 
               // 更新状态数据
-              this.$store.commit('saveUserInfo', res.data.data)
+              this.$store.commit('saveUserInfo', res.data)
 
               //编程式导航 跳转首页
               this.$router.push("/")
