@@ -28,6 +28,27 @@ axios.interceptors.request.use(function (config) {
   //不是登录的请求则添加请求头
   if(!config.url.endsWith("/login")) {
     config.headers['Access-Token'] = store.getters.accessToken
+    // config.headers['userId'] = store.state.userInfo.userId
+
+    // 判断请求的类型
+    // 如果是post请求就把默认参数拼到data里面
+    // 如果是get请求就拼到params里面
+    const userid = store.state.userInfo.userId
+    config.params = {
+      userid: userid,
+        ...config.params
+    }
+    // if(config.method === 'post') {
+    //   config.data = {
+    //     userid: userid,
+    //     ...config.data
+    // }
+    // } else if(config.method === 'get') {
+    //     config.params = {
+    //       userid: userid,
+    //         ...config.params
+    //     }
+    // }
   }
 
   console.log("请求拦截器 " , config);
