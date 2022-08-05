@@ -83,6 +83,7 @@
               <el-table-column prop="status" label="状态">
                 <template slot-scope="scope">
                   <el-switch
+                    @change="changeStatus(scope.row)"
                     v-model="scope.row.status"
                     :active-value=1
                     :inactive-value=2
@@ -92,6 +93,29 @@
                 </template>
               </el-table-column>
               <el-table-column prop="ctime" label="创建时间"></el-table-column>
+
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                  <el-button type="primary" plain icon="el-icon-edit"></el-button>
+                    <template>
+                      <el-popconfirm
+                        title="确定要删除该用户嘛?"
+                        icon="el-icon-delete"
+                        @confirm="del(scope.row.id)"
+                      >
+                      <el-button type="danger" slot="reference" plain icon="el-icon-delete"></el-button>
+                      </el-popconfirm>
+                    </template>
+
+
+                    <el-popconfirm
+                      title="这是一段内容确定删除吗？"
+                    >
+                      <el-button type="danger"  plain icon="el-icon-delete">删除</el-button>
+                    </el-popconfirm>
+                  <el-button type="success" icon="el-icon-check" plain>分配角色</el-button>
+                </template>
+              </el-table-column>
             </el-table>
           </div>
 
@@ -189,6 +213,53 @@
       this.getUserList()
     },
     methods: {
+      /**
+       *
+       * @param {删除用户} uid
+       */
+      del(uid){
+        this.$axios.delete("/user/delete" , {data : {uid:uid}})
+        .then(res => {
+          if(res.code == 200) {
+            this.$message({
+              message: res.msg,
+              type: 'success'
+            });
+            this.getUserList()
+          }
+        })
+        .catch(err => {
+          this.$message({
+              message: "删除失败",
+              type: 'error'
+            });
+        })
+      },
+      /**
+       *
+       * @param {当前变更用户} row
+       */
+      changeStatus(row) {
+        console.log(row);
+        this.$axios.post("/user/change-status" , {
+          uid:row.id,
+          status:row.status
+        })
+        .then(res => {
+          if(res.code == 200) {
+            this.$message({
+              message: res.msg,
+              type: 'success'
+            });
+          }
+        })
+        .catch(err => {
+          this.$message({
+              message: "更新异常",
+              type: 'error'
+            });
+        })
+      },
       /**
        * 搜索
        */

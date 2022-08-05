@@ -34,10 +34,11 @@
         <el-menu
           :router="true"
           :unique-opened="true"
-          default-active="/users"
+          :default-active="default_active"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
+          @select="select"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b">
@@ -47,24 +48,15 @@
               <span>系统管理</span>
             </template>
             <el-menu-item index="/users">用户管理</el-menu-item>
-            <!-- 三级菜单 -->
-             <!-- <el-submenu index="1-4">
-                <template slot="title">选项4</template>
-                <el-menu-item index="1-4-1">选项1</el-menu-item>
-              </el-submenu> -->
           </el-submenu>
 
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>系统管理</span>
+              <span>服务管理</span>
             </template>
-            <el-menu-item index="2-1">用户管理</el-menu-item>
-            <!-- 三级菜单 -->
-             <!-- <el-submenu index="1-4">
-                <template slot="title">选项4</template>
-                <el-menu-item index="1-4-1">选项1</el-menu-item>
-              </el-submenu> -->
+            <el-menu-item index="/task">执行任务</el-menu-item>
+            <el-menu-item index="/transfer">执行任务</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
@@ -78,6 +70,11 @@
 
 <script>
 export default {
+  data () {
+    return {
+      default_active : "/users"
+    }
+  },
   methods : {
     logout(){
       this.$confirm('确定要退出吗?', '提示', {
@@ -103,7 +100,13 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    select(index){
+      console.log("index = " , index);
+      this.default_active = index
     }
+  },
+  mounted(){
   }
 }
 </script>

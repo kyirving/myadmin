@@ -4,6 +4,7 @@ import Login from '@/components/login/Login'
 import Home from '@/components/home/Home'
 import store from '@/store/index'
 import Users from '@/components/users/Users'
+import Task from '@/components/task/Task'
 Vue.use(Router)
 
 const router = new Router({
@@ -17,6 +18,11 @@ const router = new Router({
           path: 'users',
           name: 'users',
           component: Users,
+        },
+        {
+          path: 'task',
+          name: 'task',
+          component: Task,
         }
       ]
     },
