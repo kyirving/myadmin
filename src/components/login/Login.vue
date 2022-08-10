@@ -58,30 +58,29 @@
 
       },
       //登录功能的实现
-      login(){
+      async login(){
 
-        this.$axios.post("http://127.0.0.1:8080/user/login" , this.loginFrom)
-        .then(res => {
-            if (res.code == 200) {
+        try {
+          const res = await this.$axios.post("http://127.0.0.1:8080/user/login" , this.loginFrom)
 
-              this.$message({
-                message: '登录成功',
-                type: 'success'
-              });
+          if (res.code == 200) {
+          this.$message({
+            message: '登录成功',
+            type: 'success'
+          });
 
-              // 更新状态数据
-              this.$store.commit('saveUserInfo', res.data)
+          // 更新状态数据
+          this.$store.commit('saveUserInfo', res.data)
 
-              //编程式导航 跳转首页
-              this.$router.push("/")
-            } else {
-              this.$message.error('登录失败');
-              // this.resetForm()
-            }
-        })
-        .catch(err => {
-          console.log(err);
-        })
+          //编程式导航 跳转首页
+          this.$router.push("/")
+        } else {
+          this.$message.error('登录失败');
+          // this.resetForm()
+        }
+        } catch (error) {
+          console.log("err = " , error);
+        }
       },
       //重置输入框内容
       resetForm() {
